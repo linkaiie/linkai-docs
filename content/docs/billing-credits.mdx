@@ -1,0 +1,31 @@
+---
+title: Billing & credits
+description: How credits are purchased, tracked, and enforced.
+---
+
+## Credits model
+
+Credits are charged based on token usage. Each request consumes at least 1
+credit, and token usage is reported in the `usage` field of responses.
+
+```
+credits_charged = max(1, ceil(total_tokens / 1000 * credits_per_1k))
+```
+
+`credits_per_1k` depends on your plan or pricing tier.
+
+## Top-ups
+
+1. Open **Billing** in the console.
+2. Choose a preset tier or enter a custom amount.
+3. Complete Stripe Checkout.
+4. Credits are added after webhook confirmation.
+
+## Refunds and negative balances
+
+Refunds add negative ledger entries. If your balance goes below zero, the
+gateway will return `402` until you top up again.
+
+## Payment methods
+
+Use **Manage payment methods (Stripe portal)** to update cards in a new tab.

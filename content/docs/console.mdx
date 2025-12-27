@@ -1,0 +1,37 @@
+---
+title: Console guide
+description: Manage projects, API keys, credits, and usage.
+---
+
+## Projects
+
+Projects are the unit of billing and rate limits. Create a separate project for
+prod/staging or different teams.
+
+## API keys
+
+- Create keys under **API Keys**.
+- Keys are shown once; only hash + prefix are stored.
+- Actions: rename, disable, rotate, delete.
+- The key overview shows recent usage and spend.
+
+## Billing
+
+- Top up credits via Stripe Checkout.
+- Orders show status, session id, payment intent id, and webhook confirmation.
+- The Stripe portal opens in a new tab for payment methods.
+
+## Usage
+
+- View usage by day, model, or API key.
+- Export CSV for the current view or logs for recent days.
+
+## Logs
+
+- Filter by API key, status, and model.
+- Pagination supports 20/50/100 rows per page.
+
+## Settings
+
+- Deleting a project requires typing the project name.
+- Deleted projects return `403` for all requests.

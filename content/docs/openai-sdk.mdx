@@ -1,0 +1,49 @@
+---
+title: OpenAI SDK
+description: Use LinkAI Route with OpenAI client libraries.
+---
+
+LinkAI Route is OpenAI-compatible. You can use the OpenAI SDK by setting the
+`baseURL` to the LinkAI Route API.
+
+## JavaScript / TypeScript
+
+```ts
+import OpenAI from "openai";
+
+const client = new OpenAI({
+  apiKey: process.env.LINKAI_API_KEY,
+  baseURL: "https://api.linkai.ie/v1",
+});
+
+const response = await client.chat.completions.create({
+  model: "openai/gpt-oss-120b",
+  messages: [{ role: "user", content: "Hello!" }],
+});
+
+console.log(response.choices[0]?.message?.content);
+```
+
+## Python
+
+```py
+import os
+from openai import OpenAI
+
+client = OpenAI(
+    api_key=os.environ["LINKAI_API_KEY"],
+    base_url="https://api.linkai.ie/v1",
+)
+
+resp = client.chat.completions.create(
+    model="openai/gpt-oss-120b",
+    messages=[{"role": "user", "content": "Hello!"}],
+)
+
+print(resp.choices[0].message.content)
+```
+
+<Callout type="info" title="Streaming">
+  Streaming is supported by the SDKs as long as they send
+  `stream: true` to `/v1/chat/completions`.
+</Callout>

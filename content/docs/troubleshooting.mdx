@@ -1,0 +1,34 @@
+---
+title: Troubleshooting
+description: Common issues and fixes.
+---
+
+## 401 Unauthorized
+
+- API key is missing, invalid, or disabled.
+- Verify `Authorization: Bearer <LINKAI_API_KEY>` and re-enable the key.
+
+## 402 Insufficient credits
+
+- Top up credits in the console and retry.
+- Refunds can push your balance negative.
+
+## 403 Project blocked
+
+- The project was deleted or archived.
+- Create a new project and API key.
+
+## 409 Idempotency conflict
+
+- The request ID was reused.
+- Generate a new `x-request-id` or `idempotency-key`.
+
+## 429 Rate limited
+
+- Slow down or lower concurrency.
+- Respect the `retry-after` header.
+
+## 502 Upstream error
+
+- Provider returned an error or invalid response.
+- Retry with exponential backoff and check logs.

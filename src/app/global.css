@@ -1,0 +1,43 @@
+@import 'tailwindcss';
+@import 'fumadocs-ui/css/neutral.css';
+@import 'fumadocs-ui/css/preset.css';
+
+:root {
+  --brand-ink: #0b1120;
+  --brand-muted: #475569;
+  --brand-sand: #fef3c7;
+  --brand-foam: #ccfbf1;
+  --brand-glow: #fde68a;
+  --hero-gradient: radial-gradient(circle at 15% 15%, var(--brand-sand), transparent 55%),
+    radial-gradient(circle at 85% 20%, var(--brand-foam), transparent 40%),
+    linear-gradient(135deg, #f8fafc 0%, #fff7ed 50%, #fef3c7 100%);
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float-slow {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-rise {
+  animation: rise 0.8s ease-out both;
+}
+
+.animate-float-slow {
+  animation: float-slow 12s ease-in-out infinite;
+}

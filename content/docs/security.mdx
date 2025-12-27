@@ -1,0 +1,25 @@
+---
+title: Security
+description: API key handling and safe defaults.
+---
+
+## API key storage
+
+- Keys are shown once on creation.
+- Store keys in server-side secrets, not in client code.
+- Rotate keys on a schedule or after any exposure.
+
+## Access control
+
+- Use separate keys per environment.
+- Disable unused keys immediately.
+
+## Data hygiene
+
+- Avoid sending API keys in query strings.
+- Use request IDs for traceability (`x-request-id`).
+
+## Response safety
+
+Provider-specific fields are stripped by default to keep responses compatible
+and minimize accidental leakage.

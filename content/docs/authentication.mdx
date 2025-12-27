@@ -1,0 +1,40 @@
+---
+title: Authentication
+description: API keys, headers, and idempotency.
+---
+
+## API keys
+
+API keys are created in the console under **API Keys**. The full key is shown
+only once, and the server stores only a hash + prefix. Store keys securely (for
+example in a secret manager or environment variable).
+
+Example format:
+
+```
+lkar_********************************
+```
+
+## Request headers
+
+Every API request must include:
+
+- `Authorization: Bearer <LINKAI_API_KEY>`
+- `Content-Type: application/json`
+
+## Idempotency and request IDs
+
+LinkAI Route uses a request ID for logging and idempotency checks. You can
+provide your own ID via either header:
+
+- `x-request-id: <uuid>`
+- `idempotency-key: <uuid>`
+
+If the same request ID is re-used, the gateway returns `409` with
+`error.code=idempotency_conflict`.
+
+## Key management
+
+- Rotate keys regularly for long-lived integrations.
+- Disable a key immediately if it is exposed.
+- Use separate keys per environment (prod/staging/dev).

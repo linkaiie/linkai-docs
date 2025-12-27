@@ -1,0 +1,22 @@
+---
+title: Rate limits
+description: RPM, concurrency, and daily caps.
+---
+
+Rate limits are enforced per project to protect your keys and budgets.
+
+## Limit types
+
+- **RPM:** Requests per minute.
+- **Concurrency:** Max in-flight requests.
+- **Daily caps:** Total requests per day.
+
+## Managing limits
+
+Use **Rate Limits** in the console to configure values per project. You can
+reset to recommended defaults at any time.
+
+## When limits are exceeded
+
+The gateway returns `429` with `error.code=rate_limit_exceeded` and a
+`retry-after` header (seconds). Respect the header before retrying.

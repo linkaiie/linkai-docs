@@ -1,0 +1,103 @@
+---
+title: Chat Completions API
+description: OpenAI-compatible /v1/chat/completions with streaming support.
+---
+
+## Base URL
+
+`https://api.linkai.ie`
+
+## Endpoint
+
+`POST /v1/chat/completions`
+
+## Request body
+
+LinkAI Route accepts OpenAI-style chat completion fields. The gateway validates
+and forwards the following fields:
+
+- `model` (string, optional)
+- `messages` (array, required)
+- `temperature` (number, optional)
+- `top_p` (number, optional)
+- `n` (integer, optional)
+- `stream` (boolean, optional)
+- `stream_options` (object, optional)
+- `stop` (string | string[], optional)
+- `max_tokens` (integer, optional)
+- `presence_penalty` (number, optional)
+- `frequency_penalty` (number, optional)
+- `logit_bias` (object, optional)
+- `user` (string, optional)
+- `response_format` (object, optional)
+- `seed` (integer, optional)
+- `tools` (any, optional)
+- `tool_choice` (any, optional)
+- `parallel_tool_calls` (boolean, optional)
+
+Message roles supported: `system`, `user`, `assistant`, `tool`.
+
+<Callout type="info" title="Model selection">
+  If `model` is omitted, the gateway uses its default. Model names are passed
+  through to the upstream provider.
+</Callout>
+
+## Non-streaming example
+
+```bash
+curl https://api.linkai.ie/v1/chat/completions \
+  -H "Authorization: Bearer <LINKAI_API_KEY>" \
+  -H "Content-Type: application/json" \
+  -d '{"model":"openai/gpt-oss-120b","messages":[{"role":"user","content":"Hello"}]}'
+```
+
+### Example response
+
+```json
+{
+  "id": "chatcmpl_123",
+  "object": "chat.completion",
+  "created": 1710000000,
+  "model": "openai/gpt-oss-120b",
+  "choices": [
+    {
+      "index": 0,
+      "message": { "role": "assistant", "content": "Hello!" },
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 12,
+    "completion_tokens": 8,
+    "total_tokens": 20
+  }
+}
+```
+
+## Streaming (SSE)
+
+```bash
+curl -N https://api.linkai.ie/v1/chat/completions \
+  -H "Authorization: Bearer <LINKAI_API_KEY>" \
+  -H "Content-Type: application/json" \
+  -d '{"model":"openai/gpt-oss-120b","stream":true,"messages":[{"role":"user","content":"Hello"}]}'
+```
+
+- The stream uses standard SSE with `data: { ... }` chunks.
+- The final chunk is `data: [DONE]`.
+- If `stream_options.include_usage` is not provided, the gateway sets it to
+  `true` so usage is emitted in the stream.
+
+## Response headers
+
+- `x-request-id`: request identifier for tracing.
+- `x-upstream-latency-ms`: upstream latency (non-streaming only).
+
+## Limits
+
+- Max request body size: **2 MB**.
+
+## Compatibility
+
+Provider-specific fields are stripped by default to keep responses compatible
+with the OpenAI format.

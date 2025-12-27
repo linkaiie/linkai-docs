@@ -1,0 +1,38 @@
+---
+title: Errors
+description: Error format, status codes, and retry behavior.
+---
+
+## Error format
+
+Errors follow the OpenAI error schema:
+
+```json
+{
+  "error": {
+    "message": "Insufficient credits.",
+    "type": "insufficient_quota",
+    "param": null,
+    "code": "insufficient_credits"
+  }
+}
+```
+
+## Common status codes
+
+| HTTP | Meaning | Notes |
+| --- | --- | --- |
+| 400 | Invalid request | Malformed body or unsupported field value. `error.code=invalid_request`. |
+| 401 | Unauthorized | Invalid or disabled API key. `error.code=invalid_api_key` or `api_key_disabled`. |
+| 402 | Insufficient credits | Top up credits and retry. `error.code=insufficient_credits`. |
+| 403 | Project blocked | Project deleted or archived. `error.code=project_deleted` or `project_archived`. |
+| 409 | Idempotency conflict | Duplicate request ID. `error.code=idempotency_conflict`. |
+| 429 | Rate limited | See Rate Limits. `error.code=rate_limit_exceeded`. |
+| 502 | Upstream error | Provider error or invalid response. Retry with backoff. |
+
+## Retry guidance
+
+- `401`, `403`: do not retry until you fix the key or project status.
+- `402`: top up credits before retrying.
+- `429`: retry after the `retry-after` header (seconds).
+- `502`: retry with exponential backoff.

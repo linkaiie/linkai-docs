@@ -1,0 +1,54 @@
+---
+title: Overview
+description: Developer documentation for the LinkAI Route API.
+---
+
+LinkAI Route is an OpenAI-compatible gateway with a console for projects, API
+keys, credits, usage, and logs. Use it like OpenRouter: one key, one endpoint,
+and full visibility into billing and traffic.
+
+<Cards>
+  <Card
+    title="Quickstart"
+    href="/docs/getting-started"
+    description="Create a key and send your first request."
+  />
+  <Card
+    title="Chat Completions API"
+    href="/docs/gateway-api"
+    description="Request schema, streaming, and examples."
+  />
+  <Card
+    title="OpenAI SDK"
+    href="/docs/openai-sdk"
+    description="Drop-in usage with OpenAI clients."
+  />
+  <Card
+    title="Errors"
+    href="/docs/errors"
+    description="Error format, codes, and retry guidance."
+  />
+  <Card
+    title="Billing & Credits"
+    href="/docs/billing-credits"
+    description="Top-ups, usage, and balance behavior."
+  />
+</Cards>
+
+## Base URLs
+
+- Console: `https://route.linkai.ie`
+- API: `https://api.linkai.ie`
+
+## Key concepts
+
+- **Project:** The unit of ownership and billing.
+- **API key:** Authenticates requests; shown once and stored as hash + prefix.
+- **Credits:** Balance used to pay for token usage.
+- **Rate limits:** RPM, concurrency, and daily caps per project.
+- **Logs & usage:** Per-request logs and aggregated usage in the console.
+
+<Callout type="info" title="OpenAI-compatible">
+  LinkAI Route accepts OpenAI-style chat completion requests. Provider-specific
+  fields are stripped from responses by default to keep compatibility.
+</Callout>

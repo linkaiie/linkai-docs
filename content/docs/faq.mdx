@@ -1,0 +1,27 @@
+---
+title: FAQ
+description: Common questions about LinkAI Route.
+---
+
+## When are credits applied after a top-up?
+
+Credits are added after Stripe payment confirmation via webhook.
+
+## Which models are supported?
+
+Model names are passed through to the upstream provider. Use a model that your
+provider supports, or contact support for a recommended list.
+
+## Can I use the OpenAI SDK?
+
+Yes. Set the `baseURL` to `https://api.linkai.ie/v1` and use your LinkAI Route
+API key.
+
+## Is streaming supported?
+
+Yes. Send `stream: true` to `/v1/chat/completions` and read SSE chunks until
+`[DONE]`.
+
+## Why did my request fail with 402?
+
+Your credit balance is below 1. Top up credits to continue.

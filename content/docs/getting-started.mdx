@@ -1,0 +1,39 @@
+---
+title: Getting started
+description: Create an API key and send your first request.
+---
+
+## Create your account
+
+1. Sign in to the console at `https://route.linkai.ie`.
+2. Create a project for your app or team.
+3. Generate an API key from **API Keys**. The full key is shown once.
+4. Top up credits in **Billing** to activate the key.
+
+## Send your first request
+
+```bash
+curl https://api.linkai.ie/v1/chat/completions \
+  -H "Authorization: Bearer <LINKAI_API_KEY>" \
+  -H "Content-Type: application/json" \
+  -d '{"model":"openai/gpt-oss-120b","messages":[{"role":"user","content":"Hello"}]}'
+```
+
+## Streaming (SSE)
+
+```bash
+curl -N https://api.linkai.ie/v1/chat/completions \
+  -H "Authorization: Bearer <LINKAI_API_KEY>" \
+  -H "Content-Type: application/json" \
+  -d '{"model":"openai/gpt-oss-120b","stream":true,"messages":[{"role":"user","content":"Hello"}]}'
+```
+
+<Callout type="info" title="Tip">
+  Use `-N` to disable buffering so tokens stream immediately.
+</Callout>
+
+## Next steps
+
+- Learn the full request schema in **Chat Completions API**.
+- Configure OpenAI SDK clients to point at LinkAI Route.
+- Monitor usage and logs in the console.

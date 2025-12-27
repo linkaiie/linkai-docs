@@ -1,0 +1,18 @@
+{
+  "title": "LinkAI Route",
+  "pages": [
+    "index",
+    "getting-started",
+    "authentication",
+    "gateway-api",
+    "openai-sdk",
+    "errors",
+    "rate-limits",
+    "billing-credits",
+    "usage-logs",
+    "console",
+    "security",
+    "troubleshooting",
+    "faq"
+  ]
+}
